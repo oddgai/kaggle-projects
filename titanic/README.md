@@ -52,3 +52,5 @@ CSVファイルで以下の形式
 | exp005 | 0.76315 | 0.8507±0.012 | アンサンブル手法（過学習により悪化） | exp004 |
 | exp006 | 0.77272 | 0.8440±0.011 | Less is More（15特徴量、exp001と同値） | exp004 |
 | exp007 | 0.77751 | - | Domain Expert（タイタニック歴史的事実活用） | exp004 |
+| exp008 | **0.78468** | 0.8541±0.021 | Advanced Feature Engineering（最高スコア達成！） | Kaggle Tutorial |
+| exp009 | 0.78229 | 0.8485±- | Perfect Ensemble（6モデル、exp008には及ばず） | exp008 |
