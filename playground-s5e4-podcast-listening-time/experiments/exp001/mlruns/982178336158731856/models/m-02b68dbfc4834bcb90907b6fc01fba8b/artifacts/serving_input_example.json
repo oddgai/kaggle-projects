@@ -1,0 +1,36 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "Podcast_Name",
+      "Episode_Title",
+      "Episode_Length_minutes",
+      "Genre",
+      "Host_Popularity_percentage",
+      "Publication_Day",
+      "Publication_Time",
+      "Guest_Popularity_percentage",
+      "Number_of_Ads",
+      "Episode_Sentiment",
+      "Ad_Density",
+      "Host_Guest_Popularity_Diff",
+      "Has_Guest"
+    ],
+    "data": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/koki.ogai/Documents/ghq/github.com/oddgai/kaggle-projects/playground-s5e4-podcast-listening-time/experiments/exp001/mlruns/700579899991382687/08bfc0589c7747298b8fae0ae7fdb90b/artifacts
+end_time: 1756800874127
+entry_point_name: ''
+experiment_id: '700579899991382687'
+lifecycle_stage: active
+run_id: 08bfc0589c7747298b8fae0ae7fdb90b
+run_name: exp001_lightgbm_baseline
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756800874115
+status: 4
+tags: []
+user_id: koki.ogai

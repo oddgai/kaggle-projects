@@ -1,0 +1,40 @@
+{
+  "experiment_id": "exp001",
+  "model_type": "LightGBM",
+  "objective": "Baseline model for podcast listening time prediction",
+  "date": "2025-09-02T17:20:04.151055",
+  "data_info": {
+    "train_samples": 750000,
+    "test_samples": 250000,
+    "features": 13,
+    "target": "Listening_Time_minutes"
+  },
+  "preprocessing": {
+    "missing_value_strategy": "median_imputation",
+    "categorical_encoding": "label_encoding",
+    "new_features": [
+      "Ad_Density",
+      "Host_Guest_Popularity_Diff",
+      "Has_Guest"
+    ]
+  },
+  "results": {
+    "cv_rmse": "13.0023 ± 0.0216",
+    "public_score": 13.13295,
+    "private_score": 13.02087,
+    "validation_r2": 0.7712
+  },
+  "key_findings": [
+    "Episode_Length_minutes is the most important feature",
+    "Ad_Density (new feature) ranks 2nd in importance",
+    "CV score closely matches public/private scores",
+    "No overfitting detected",
+    "Stable model performance across folds"
+  ],
+  "next_steps": [
+    "Target encoding for categorical variables",
+    "Feature interactions (genre x popularity)",
+    "Hyperparameter optimization",
+    "Ensemble with XGBoost"
+  ]
+}

@@ -1,0 +1,10 @@
+artifact_location: file:///Users/koki.ogai/Documents/ghq/github.com/oddgai/kaggle-projects/playground-s5e4-podcast-listening-time/experiments/exp001/mlruns/982178336158731856/models/m-02b68dbfc4834bcb90907b6fc01fba8b/artifacts
+creation_timestamp: 1756812078281
+experiment_id: '982178336158731856'
+last_updated_timestamp: 1756812079948
+model_id: m-02b68dbfc4834bcb90907b6fc01fba8b
+model_type: null
+name: lightgbm_model
+source_run_id: 10d353bd0710414eb298d0a82eec3ee2
+status: 2
+status_message: null

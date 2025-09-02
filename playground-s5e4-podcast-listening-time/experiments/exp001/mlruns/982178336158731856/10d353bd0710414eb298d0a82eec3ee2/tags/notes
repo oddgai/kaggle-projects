@@ -1,0 +1,28 @@
+
+        ## Experiment Notes - exp001
+        
+        ### Objective
+        Create a baseline model for podcast listening time prediction using LightGBM.
+        
+        ### Key Insights
+        1. Episode length is by far the most predictive feature
+        2. New feature Ad_Density (ads per minute) is highly effective 
+        3. Host and guest popularity are moderately important
+        4. Model shows good generalization (CV ≈ Public ≈ Private scores)
+        
+        ### Feature Engineering Successes
+        - Ad_Density: Simple but effective ratio feature
+        - Has_Guest: Binary flag for guest presence
+        - Host_Guest_Popularity_Diff: Difference in popularity scores
+        
+        ### Model Performance
+        - Stable across CV folds (std = 0.02)
+        - No signs of overfitting
+        - R² = 0.77 indicates good predictive power
+        
+        ### Areas for Improvement
+        1. Target encoding could help with high-cardinality categoricals
+        2. Feature interactions not fully explored
+        3. Hyperparameter tuning potential
+        4. Ensemble opportunities
+        

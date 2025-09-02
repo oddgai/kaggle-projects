@@ -1,0 +1,80 @@
+{
+  "experiment_id": "exp001",
+  "model_type": "LightGBM",
+  "model_params": {
+    "objective": "regression",
+    "metric": "rmse",
+    "boosting_type": "gbdt",
+    "num_leaves": 31,
+    "learning_rate": 0.05,
+    "feature_fraction": 0.9,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 5,
+    "verbose": -1,
+    "random_state": 42
+  },
+  "features": [
+    "Podcast_Name",
+    "Episode_Title",
+    "Episode_Length_minutes",
+    "Genre",
+    "Host_Popularity_percentage",
+    "Publication_Day",
+    "Publication_Time",
+    "Guest_Popularity_percentage",
+    "Number_of_Ads",
+    "Episode_Sentiment",
+    "Ad_Density",
+    "Host_Guest_Popularity_Diff",
+    "Has_Guest"
+  ],
+  "num_features": 13,
+  "new_features": [
+    "Ad_Density",
+    "Host_Guest_Popularity_Diff",
+    "Has_Guest"
+  ],
+  "train_rmse": 12.6652,
+  "train_mae": 9.291,
+  "train_r2": 0.7822,
+  "val_rmse": 12.9741,
+  "val_mae": 9.4493,
+  "val_r2": 0.7712,
+  "cv_scores": [
+    12.9762,
+    13.0254,
+    13.0208,
+    13.0126,
+    12.9766
+  ],
+  "cv_rmse_mean": 13.0023,
+  "cv_rmse_std": 0.0216,
+  "feature_importance": {
+    "Episode_Length_minutes": 2569071625,
+    "Ad_Density": 159828568,
+    "Number_of_Ads": 46218796,
+    "Host_Popularity_percentage": 22167891,
+    "Guest_Popularity_percentage": 11931373,
+    "Has_Guest": 7965109,
+    "Episode_Sentiment": 7717943,
+    "Host_Guest_Popularity_Diff": 4737642,
+    "Genre": 4511926,
+    "Publication_Time": 2857438,
+    "Publication_Day": 2615967,
+    "Podcast_Name": 2377431,
+    "Episode_Title": 2164765
+  },
+  "public_score": 13.13295,
+  "private_score": 13.02087,
+  "train_size": 750000,
+  "test_size": 250000,
+  "target_variable": "Listening_Time_minutes",
+  "cv_folds": 5,
+  "validation_split": 0.2,
+  "random_state": 42,
+  "preprocessing": {
+    "missing_value_strategy": "median_imputation",
+    "categorical_encoding": "label_encoding",
+    "feature_engineering": "label_encoding,missing_value_imputation,new_features"
+  }
+}

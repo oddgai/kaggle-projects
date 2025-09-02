@@ -1,0 +1,41 @@
+artifact_path: file:///Users/koki.ogai/Documents/ghq/github.com/oddgai/kaggle-projects/playground-s5e4-podcast-listening-time/experiments/exp001/mlruns/846077018574356535/models/m-3fdc533cb4664f119fc925587e1ad1a1/artifacts
+flavors:
+  lightgbm:
+    code: null
+    data: model.lgb
+    lgb_version: 4.6.0
+    model_class: lightgbm.basic.Booster
+  python_function:
+    data: model.lgb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.lightgbm
+    python_version: 3.12.11
+is_signature_from_type_hint: false
+mlflow_version: 3.3.2
+model_id: m-3fdc533cb4664f119fc925587e1ad1a1
+model_size_bytes: 2839604
+model_uuid: m-3fdc533cb4664f119fc925587e1ad1a1
+prompts: null
+run_id: c891b6d7a7c542f89c98491e9225af00
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "long", "name": "Podcast_Name", "required": true}, {"type": "long",
+    "name": "Episode_Title", "required": true}, {"type": "long", "name": "Episode_Length_minutes",
+    "required": true}, {"type": "long", "name": "Genre", "required": true}, {"type":
+    "long", "name": "Host_Popularity_percentage", "required": true}, {"type": "long",
+    "name": "Publication_Day", "required": true}, {"type": "long", "name": "Publication_Time",
+    "required": true}, {"type": "long", "name": "Guest_Popularity_percentage", "required":
+    true}, {"type": "long", "name": "Number_of_Ads", "required": true}, {"type": "long",
+    "name": "Episode_Sentiment", "required": true}, {"type": "long", "name": "Ad_Density",
+    "required": true}, {"type": "long", "name": "Host_Guest_Popularity_Diff", "required":
+    true}, {"type": "long", "name": "Has_Guest", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-09-02 08:15:28.552116'
