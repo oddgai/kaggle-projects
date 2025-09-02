@@ -210,3 +210,132 @@ uv run jupyter nbconvert --to notebook --execute <notebook_path> --inplace --Exe
 - 実行前に必要な環境変数（`.env`ファイル等）が適切に設定されていることを確認する
 - 長時間実行されるセルがある場合は`--ExecutePreprocessor.timeout`の値を調整する
 - VS Codeで開いている場合は実行後にファイルの更新を確認する
+
+## MLflow 実験管理
+
+### 実験結果の記録方法
+
+#### 1. データフロー
+
+実験結果は以下のフローで管理する
+
+```
+ノートブック実行 → experiment_results.json保存 → log_to_mlflow.py実行
+```
+
+- YOU MUST: ノートブックで実験が完了したら、全ての結果を `results/expXXX/experiment_results.json` に保存する
+- YOU MUST: MLflowへの記録は専用の `log_to_mlflow.py` スクリプトで行う
+- NEVER: 実験結果やメトリクスをlog_to_mlflow.pyにハードコードしない
+
+#### 2. experiment_results.jsonの形式
+
+以下の情報を必ずJSONに含める
+
+```json
+{
+  "experiment_id": "exp001",
+  "model_type": "LightGBM",
+  "model_params": {...},
+  "features": [...],
+  "train_rmse": 12.6652,
+  "val_rmse": 12.9741,
+  "cv_scores": [...],
+  "feature_importance": {...},
+  "public_score": 13.13295,
+  "private_score": 13.02087,
+  "preprocessing": {...}
+}
+```
+
+#### 3. MLflow Run設定
+
+- **Run名の形式**: `expXXX_YYYYMMDDHHmmss`
+  - 例: `exp001_20250902205545`
+- **Description**: 日本語で簡潔に記載
+  - 例: `LightGBMベースラインモデル。基本的な特徴量エンジニアリング（Ad_Density, Has_Guest）を実装した初回実験。exp000（EDA）から派生。`
+- **タグ**: 不要（使用しない）
+
+#### 4. アーティファクト作成
+
+##### 特徴量重要度グラフ
+
+```python
+plt.figure(figsize=(12, 8))
+# グラフ作成処理...
+plt.savefig("feature_importance_plot.png", dpi=80, bbox_inches="tight")
+mlflow.log_artifact("feature_importance_plot.png")
+```
+
+- YOU MUST: dpiは80に設定（ファイルサイズ最適化のため）
+- YOU MUST: bbox_inches="tight"を指定
+
+##### README.mdのHTML変換
+
+- YOU MUST: 各実験のREADME.mdをHTMLに変換してアーティファクトとして記録
+- YOU MUST: HTMLは改行を最小限にして1行にまとめる
+- YOU MUST: ハイパーパラメータはテーブル形式で表示
+- YOU MUST: 特徴量リストは個別の`<li>`タグで箇条書き
+
+#### 5. log_to_mlflow.pyの構造
+
+```python
+def log_experiment_to_mlflow():
+    # 1. Databricks MLflow設定
+    mlflow.set_tracking_uri("databricks")
+    
+    # 2. JSONファイルから実験結果を読み込み
+    with open('experiment_results.json', 'r') as f:
+        exp_results = json.load(f)
+    
+    # 3. MLflowにパラメータ、メトリクス、アーティファクトを記録
+    with mlflow.start_run(run_name=run_name, description=description):
+        # JSONデータを元に記録処理
+        pass
+```
+
+- YOU MUST: 全てのデータはJSONから読み込む
+- NEVER: メトリクスや特徴量重要度をスクリプトにハードコードしない
+
+### Databricks MLflow設定
+
+- **実験パス**: `/Shared/data_science/z_ogai/[project-name]`
+- **フォールバック**: Databricks接続エラー時はローカルMLflowに自動切り替え
+
+## 実験フロー管理
+
+### 実験間でのgit操作ルール
+
+継続的な実験を行う際の標準的なワークフロー
+
+#### 基本フロー
+
+```
+1. expXXX実験完了 → 2. MLflow記録完了 → 3. git push → 4. 次実験（expXXX+1）開始
+```
+
+#### 具体的な手順
+
+1. **実験完了確認**
+   - ノートブック実行が正常終了
+   - experiment_results.json生成完了
+   - 提出ファイル生成完了
+
+2. **MLflow記録**
+   - log_to_mlflow.py実行完了
+   - Databricks MLflowに正常記録
+
+3. **Git操作（要許可）**
+   - すべての実験ファイルをaddする前に必ず確認
+   - コミットメッセージは実験内容を簡潔に記載
+   - 例: `Add exp002: XGBoost with enhanced feature engineering (CV RMSE: 12.8926)`
+
+4. **次実験準備**
+   - 新しいexpXXXディレクトリ作成
+   - 前実験の結果を踏まえた改善施策実装
+
+#### 注意事項
+
+- YOU MUST: 各実験完了後、必ず次実験に進む前にgit pushする
+- YOU MUST: 実験途中での中間コミットは避け、完了後の一括コミットを基本とする
+- YOU MUST: pushする前に必ずユーザーに確認を取る
+- IMPORTANT: 長時間実験を行う場合は、実験開始前に現状をpushしておく

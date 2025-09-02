@@ -206,10 +206,10 @@ def objective(trial):
 
 # Optuna最適化の実行
 print("\n=== Optunaによるハイパーパラメータ最適化開始 ===")
-print("試行回数: 100回")
+print("試行回数: 30回（効率化）")
 
 study = optuna.create_study(direction='minimize', sampler=TPESampler(seed=42))
-study.optimize(objective, n_trials=100, timeout=3600)  # 1時間のタイムアウト
+study.optimize(objective, n_trials=30, timeout=1200)  # 20分、30試行に短縮
 
 print("\n=== 最適化結果 ===")
 print(f"最適スコア (CV RMSE): {study.best_value:.4f}")
@@ -357,7 +357,7 @@ experiment_results = {
     'experiment_id': 'exp003',
     'model_type': 'XGBoost_Optimized',
     'optimization_method': 'Optuna',
-    'n_trials': study.n_trials,
+    'n_trials': len(study.trials),
     'model_params': best_params,
     'best_num_boost_round': num_boost_round,
     
