@@ -16,7 +16,7 @@ cp config/mlflow_config.example.json config/mlflow_config.json
 - `experiment_path`: Databricks上の実験パス
   - 例：`"/Shared/data_science/your_username/project-name"`
 
-#### ローカル環境  
+#### ローカル環境
 - `tracking_uri`: ローカルMLflowのURI
   - 例：`"file:///tmp/mlruns"`
 - `experiment_name`: ローカル実験名
@@ -38,6 +38,6 @@ cp config/mlflow_config.example.json config/mlflow_config.json
 - ワークスペースへのアクセス権限を確認
 - `experiment_path`の権限を確認
 
-#### ローカル接続エラー  
+#### ローカル接続エラー
 - MLflowのインストールを確認：`pip install mlflow`
 - ディレクトリの書き込み権限を確認
