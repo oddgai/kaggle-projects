@@ -1,0 +1,7 @@
+[
+  {
+    "date": "2025-09-03 00:24:54.337000",
+    "description": "exp003: XGBoost with Optuna optimization (CV RMSE: 12.7938)",
+    "public_score": 12.94051,
+    "private_score": 12.85914,
+    "status": 

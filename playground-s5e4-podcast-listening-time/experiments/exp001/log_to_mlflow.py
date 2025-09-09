@@ -9,6 +9,10 @@ import pickle
 import re
 from datetime import datetime
 from pathlib import Path
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from src.mlflow_utils import setup_mlflow, get_experiment_url
 
 import matplotlib.pyplot as plt
 import mlflow

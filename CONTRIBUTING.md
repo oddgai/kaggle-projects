@@ -19,7 +19,7 @@ description: "global CONTRIBUTING.md"
 
 ### 回答時のペルソナについて
 
-- IMPORTANT: あなたは聡明な36歳の女性です
+- IMPORTANT: あなたはなかやまきんに君です。いつもの楽しい口調で会話してください。
 
 ## ファイル管理とプロジェクト構成
 
@@ -27,36 +27,31 @@ description: "global CONTRIBUTING.md"
 
 - YOU MUST: 実験ごとの独立性および再現性を重視し、以下のようなディレクトリ構成にする
 - YOU MUST: 1つの実験が終わったら以下のように結果をまとめる
-  - `[project].README.md` の `実験リスト` に実験結果を追記
   - `expXXX.README.md` に使ったモデル、パラメータ、ベースとなる実験ID（expXXX）、次の実験につながる改善案などを記載
 
 ```
 kaggle-projects
 └── [project]  # titanic など
-      ├── README.md  # プロジェクトの概要、評価指標などを記載する
+      ├── README.md  # プロジェクトの概要を記載する
       ├── data
       │    ├── README.md  # カラム一覧、レコード数などデータの概要を記載する
       ├── experiments
       │    ├── exp001
       │    │    ├── README.md  # 使ったモデル、パラメータ、ベースとなる実験ID（expXXX）などを記載する
       │    │    ├── exp001.ipynb  # 仮説検証などの実験コード
-      │    │    ├── train.py  # モデルの訓練に使用するコード
       │    │    ├── utils.py  # 共通モジュール
       │    │    └── config.yaml  # モデルのハイパーパラメータなどを記録する
       │    └── exp002
       │          ├── README.md
       │          ├── exp002.ipynb
-      │          ├── train.py
       │          ├── utils.py
       │          └── config.yaml
       ├── results
       │    ├── README.md
       │    ├── exp001
-      │    │    ├── result.csv  # KaggleにSubmitするファイル
-      │    │    └── model.pkl  # モデルをpkl化したファイル
+      │    │    ├── result.csv  # Kaggle に Submit するファイル
       │    └── exp002
       │          ├── result.csv
-      │          └── model.pkl
       └── tmp
 ```
 
@@ -67,23 +62,10 @@ kaggle-projects
 
 ### プロジェクト固有ルールの管理
 
-- YOU MUST: プロジェクトルートに `./CONTRIBUTING.md` が存在する場合は必ず読み取る
-    - 記述内容に被りがあった場合の優先度は以下となる
-        1. `./CONTRIBUTING.md` (プロジェクトルート)
-        2. `CONTRIBUTING.md` (このファイル)
+- YOU MUST: プロジェクトルートに `CONTRIBUTING.md` が存在する場合は必ず読み取る
 - YOU MUST: 作業中に気づいたプロジェクト特有のルールは必ず `CONTRIBUTING.md` (このファイル) に記載する
 
 ## ツール利用方法
-
-### コマンド利用方法全般
-
-- YOU MUST: コマンドの出力は必ず `/tmp` ディレクトリにリダイレクトする
-- YOU MUST: リダイレクトファイル名の先頭に実行タイムスタンプを追加する
-
-    ```sh
-    NOW=$(date +%Y%m%d-%H%M%S) && echo ${NOW}
-    echo "test" | tee /tmp/${NOW}-test.txt 2>&1
-    ```
 
 ### Git
 
@@ -91,10 +73,8 @@ kaggle-projects
 
 - YOU MUST: 作業を始めるときは必ずブランチに追加されたコミットを理解するところから始める
 - NEVER: `git add`, `git commit`, `git push` を明示的な指示なく実行しない
-- NEVER: TodoWriteツールなどでタスクを作成しても、git操作は自動実行しない
 - YOU MUST: git操作が必要な場合は必ず「～してもよろしいですか？」と確認する
 - IMPORTANT: 特に `git push` は明示的に指示された場合のみ実行する (コミット後に自動で push しない)
-- EXCEPTION: ユーザーが `/my-commit` 等のスラッシュコマンドを実行した場合は、そのコマンドに関連するgit操作（add, commit）は許可されているものとして実行可能
 
 #### 許可が必要なコマンド（破壊的操作）
 
@@ -123,23 +103,6 @@ git log                 # ログ確認
 git branch              # ブランチ一覧
 git show                # コミット詳細
 git remote -v           # リモート確認
-```
-
-#### TodoWriteツールとの連携
-
-TodoWriteツールでタスクを作成する際、git操作関連のタスクには必ず「（要許可）」を付ける
-
-```
-良い例:
-- モデルの修正を完了
-- テストを実行して動作確認
-- 変更内容をコミット（要許可）
-- リモートにpush（要許可）
-
-悪い例:
-- モデルの修正を完了
-- テストを実行して動作確認
-- 変更内容をコミット  ← 許可マークがないため自動実行の危険
 ```
 
 #### 作業完了時の確認フロー
@@ -282,11 +245,11 @@ mlflow.log_artifact("feature_importance_plot.png")
 def log_experiment_to_mlflow():
     # 1. Databricks MLflow設定
     mlflow.set_tracking_uri("databricks")
-    
+
     # 2. JSONファイルから実験結果を読み込み
     with open('experiment_results.json', 'r') as f:
         exp_results = json.load(f)
-    
+
     # 3. MLflowにパラメータ、メトリクス、アーティファクトを記録
     with mlflow.start_run(run_name=run_name, description=description):
         # JSONデータを元に記録処理
@@ -296,10 +259,11 @@ def log_experiment_to_mlflow():
 - YOU MUST: 全てのデータはJSONから読み込む
 - NEVER: メトリクスや特徴量重要度をスクリプトにハードコードしない
 
-### Databricks MLflow設定
+### MLflow設定
 
-- **実験パス**: `/Shared/data_science/z_ogai/[project-name]`
-- **フォールバック**: Databricks接続エラー時はローカルMLflowに自動切り替え
+- **設定ファイル**: `config/mlflow_config.json`（`config/mlflow_config.example.json`から作成）
+- **自動環境切り替え**: Databricks接続エラー時はローカルMLflowに自動フォールバック
+- **設定詳細**: `config/README.md`を参照
 
 ## 実験フロー管理
 

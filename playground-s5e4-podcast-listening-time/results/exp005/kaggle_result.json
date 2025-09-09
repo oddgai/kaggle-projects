@@ -1,0 +1,9 @@
+{
+  "experiment_id": "exp005",
+  "public_score": 13.10978,
+  "private_score": 13.00859,
+  "submission_date": "2025-09-03 02:52:21.300000",
+  "status": "SubmissionStatus.COMPLETE",
+  "cv_rmse": 10.2268,
+  "improvement_from_exp003": 2.567
+}

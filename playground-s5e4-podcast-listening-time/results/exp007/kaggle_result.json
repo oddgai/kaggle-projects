@@ -1,0 +1,12 @@
+{
+  "experiment_id": "exp007",
+  "public_score": 13.01865,
+  "private_score": 12.90607,
+  "submission_date": "2025-09-08 04:12:52.977000",
+  "status": "SubmissionStatus.COMPLETE",
+  "cv_rmse": 12.943302,
+  "predicted_public_score": 13.0433,
+  "prediction_error": 0.02465000000000117,
+  "actual_cv_kaggle_gap": 0.07534799999999997,
+  "approach": "Competition Insights: Advanced Feature Engineering + XGB/LGB/CAT Ensemble"
+}

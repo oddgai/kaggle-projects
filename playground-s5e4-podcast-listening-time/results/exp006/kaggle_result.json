@@ -1,0 +1,12 @@
+{
+  "experiment_id": "exp006",
+  "public_score": 13.13878,
+  "private_score": 13.03079,
+  "submission_date": "2025-09-03 03:07:17.173000",
+  "status": "SubmissionStatus.COMPLETE",
+  "cv_rmse": 12.623664,
+  "predicted_public_score": 12.773664,
+  "prediction_error": 0.36511600000000044,
+  "actual_cv_kaggle_gap": 0.5151160000000008,
+  "approach": "Less_is_More"
+}

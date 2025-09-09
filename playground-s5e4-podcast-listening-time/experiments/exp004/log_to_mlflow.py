@@ -11,6 +11,10 @@ import seaborn as sns
 import pandas as pd
 from datetime import datetime
 from pathlib import Path
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from src.mlflow_utils import setup_mlflow, get_experiment_url
 
 def create_readme_html():
     """
@@ -27,24 +31,8 @@ def log_experiment_to_mlflow():
     """
     exp004の実験結果をMLflowに記録
     """
-    # 1. Databricks MLflow設定
-    try:
-        mlflow.set_tracking_uri("databricks")
-        print("Databricks MLflow接続成功")
-    except Exception as e:
-        print(f"Databricks MLflow接続エラー: {e}")
-        print("ローカルMLflowに切り替え")
-        mlflow.set_tracking_uri("file:///tmp/mlruns")
-    
-    # 実験パスの設定
-    experiment_name = "/Shared/data_science/z_ogai/playground-s5e4-podcast-listening-time"
-    try:
-        mlflow.set_experiment(experiment_name)
-        print(f"実験パス設定: {experiment_name}")
-    except Exception as e:
-        print(f"Databricks実験パス設定エラー: {e}")
-        mlflow.set_experiment("playground-s5e4-podcast-listening-time")
-        print("ローカル実験名に設定")
+    # MLflow設定（外部設定ファイル使用）
+    experiment_path, environment = setup_mlflow()
     
     # 2. JSONファイルから実験結果を読み込み
     results_path = Path('../../results/exp004/experiment_results.json')

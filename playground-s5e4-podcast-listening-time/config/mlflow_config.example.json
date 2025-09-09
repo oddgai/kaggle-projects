@@ -1,0 +1,11 @@
+{
+  "databricks": {
+    "tracking_uri": "databricks",
+    "experiment_path": "/Shared/data_science/[your_username]/[project-name]"
+  },
+  "local": {
+    "tracking_uri": "file:///tmp/mlruns",
+    "experiment_name": "playground-s5e4-podcast-listening-time"
+  },
+  "default_environment": "databricks"
+}
