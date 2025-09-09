@@ -1,0 +1,12 @@
+{
+  "experiment_id": "exp008",
+  "public_score": 12.83785,
+  "private_score": 12.72488,
+  "submission_date": "2025-09-09 23:33:45.480000",
+  "status": "SubmissionStatus.COMPLETE",
+  "cv_rmse": 12.865496,
+  "predicted_public_score": 12.9155,
+  "prediction_error": 0.07765000000000022,
+  "actual_cv_kaggle_gap": -0.027646000000000726,
+  "approach": "Ultra-Optimized LightGBM: Optuna + Ugly Ducklings + Advanced FE"
+}
