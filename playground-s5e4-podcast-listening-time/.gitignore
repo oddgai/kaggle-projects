@@ -130,4 +130,6 @@ logs/
 # Experiment outputs
 results/*/model.pkl
 results/*/model.joblib
+results/*/submission.csv
+results/*/result.csv
 catboost_info/
